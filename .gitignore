@@ -4,3 +4,5 @@ node_modules/
 media/
 .env
 src/payload-types.ts
+.vercel
+.env*.local
