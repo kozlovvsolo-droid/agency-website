@@ -5,7 +5,10 @@ import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
-export function Contact() {
+export function Contact({ siteSettings }: { siteSettings?: { contactEmail?: string; contactPhone?: string; address?: string } }) {
+  const email = siteSettings?.contactEmail || 'hello@agency.com'
+  const phone = siteSettings?.contactPhone || '+1 (555) 000-0000'
+  const address = siteSettings?.address || 'Remote — Worldwide'
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -50,7 +53,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Email</p>
-                  <p className="text-gray-600">hello@agency.com</p>
+                  <p className="text-gray-600">{email}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -59,7 +62,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Phone</p>
-                  <p className="text-gray-600">+1 (555) 000-0000</p>
+                  <p className="text-gray-600">{phone}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -68,7 +71,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Location</p>
-                  <p className="text-gray-600">Remote — Worldwide</p>
+                  <p className="text-gray-600">{address}</p>
                 </div>
               </div>
             </div>

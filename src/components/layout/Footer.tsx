@@ -1,18 +1,40 @@
 import React from 'react'
 import { Container } from '@/components/ui/Container'
+import { Linkedin, Twitter, Instagram } from 'lucide-react'
 
-export function Footer() {
+export function Footer({ siteSettings }: { siteSettings?: { siteName?: string; contactEmail?: string; socialLinks?: { linkedin?: string; twitter?: string; instagram?: string } } }) {
+  const siteName = siteSettings?.siteName || 'Agency'
+  const socialLinks = siteSettings?.socialLinks
   return (
     <footer className="bg-gray-900 text-gray-300 py-16">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Agency<span className="text-accent-400">.</span>
+              {siteName}<span className="text-accent-400">.</span>
             </h3>
             <p className="text-gray-400 max-w-md mb-6">
               We build digital experiences that make your business grow. From AI solutions to full-stack web development.
             </p>
+            {socialLinks && (
+              <div className="flex gap-4">
+                {socialLinks.linkedin && (
+                  <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                    <Linkedin size={20} />
+                  </a>
+                )}
+                {socialLinks.twitter && (
+                  <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+                    <Twitter size={20} />
+                  </a>
+                )}
+                {socialLinks.instagram && (
+                  <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+                    <Instagram size={20} />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div>
@@ -41,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Digital Agency. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {siteName}. All rights reserved.</p>
         </div>
       </Container>
     </footer>

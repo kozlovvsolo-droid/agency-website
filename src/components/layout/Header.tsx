@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Send } from 'lucide-react'
 
 const navLinks = [
   { label: 'Services', href: '#services' },
@@ -46,6 +46,17 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+            <a
+              href="https://t.me/easyailifes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-lg transition-colors hover:bg-primary-50 ${
+                isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:bg-white/10'
+              }`}
+              aria-label="Telegram"
+            >
+              <Send size={18} />
+            </a>
             <a
               href="#contact"
               className="bg-primary-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"

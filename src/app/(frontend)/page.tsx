@@ -3,20 +3,24 @@ export const dynamic = 'force-dynamic'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { Hero } from '@/components/sections/Hero'
+import { TrustedBy } from '@/components/sections/TrustedBy'
 import { Services } from '@/components/sections/Services'
 import { Portfolio } from '@/components/sections/Portfolio'
+import { Stats } from '@/components/sections/Stats'
 import { HowItWorks } from '@/components/sections/HowItWorks'
 import { Pricing } from '@/components/sections/Pricing'
 import { Testimonials } from '@/components/sections/Testimonials'
+import { FAQ } from '@/components/sections/FAQ'
 import { Contact } from '@/components/sections/Contact'
 
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
 
-  const [heroData, howItWorksData, servicesData, portfolioData, plansData, testimonialsData] =
+  const [heroData, howItWorksData, siteSettings, servicesData, portfolioData, plansData, testimonialsData] =
     await Promise.all([
       payload.findGlobal({ slug: 'hero-section' }),
       payload.findGlobal({ slug: 'how-it-works' }),
+      payload.findGlobal({ slug: 'site-settings' }),
       payload.find({ collection: 'services', sort: 'order', limit: 20 }),
       payload.find({
         collection: 'portfolio',
@@ -34,12 +38,15 @@ export default async function HomePage() {
   return (
     <main>
       <Hero data={heroData} />
+      <TrustedBy />
       <Services services={servicesData.docs as any[]} />
+      <Stats />
       <Portfolio items={portfolioData.docs as any[]} />
       <HowItWorks data={howItWorksData} />
       <Pricing plans={plansData.docs as any[]} />
       <Testimonials testimonials={testimonialsData.docs as any[]} />
-      <Contact />
+      <FAQ />
+      <Contact siteSettings={siteSettings as any} />
     </main>
   )
 }

@@ -12,6 +12,7 @@ import { Portfolio } from './collections/Portfolio'
 import { Testimonials } from './collections/Testimonials'
 import { PricingPlans } from './collections/PricingPlans'
 import { ContactSubmissions } from './collections/ContactSubmissions'
+import { BlogPosts } from './collections/BlogPosts'
 
 import { HeroSection } from './globals/HeroSection'
 import { HowItWorks } from './globals/HowItWorks'
@@ -42,6 +43,7 @@ export default buildConfig({
     Testimonials,
     PricingPlans,
     ContactSubmissions,
+    BlogPosts,
   ],
   globals: [HeroSection, HowItWorks, SiteSettings],
   db: process.env.POSTGRES_URL

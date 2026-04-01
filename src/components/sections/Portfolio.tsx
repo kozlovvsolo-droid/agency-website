@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { ExternalLink } from 'lucide-react'
@@ -40,9 +41,11 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
               {/* Background layer */}
               <div className="absolute inset-0" style={{ zIndex: 0 }}>
                 {item.image?.url ? (
-                  <img
+                  <Image
                     src={item.image.url}
                     alt={item.image.alt || item.title}
+                    width={800}
+                    height={600}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (

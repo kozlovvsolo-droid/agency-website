@@ -8,10 +8,10 @@ export async function seed(payload: Payload) {
     collection: 'users',
     data: {
       email: 'admin@agency.com',
-      password: 'password',
+      password: process.env.ADMIN_PASSWORD || 'change-me-immediately',
     },
   })
-  console.log('Created admin user: admin@agency.com / password')
+  console.log('Created admin user: admin@agency.com')
 
   // 2. Create services
   const servicesData = [
@@ -389,6 +389,45 @@ export async function seed(payload: Payload) {
     },
   })
   console.log('Seeded Site Settings')
+
+  // 9. Seed blog posts
+  const blogPostsData = [
+    {
+      title: 'How an AI Chatbot Can Replace Your Support Team',
+      slug: 'ai-chatbot-replace-support-team',
+      excerpt: 'Modern AI chatbots can handle up to 80% of routine customer inquiries without human intervention. We break down the real-world results from deploying AI support across multiple industries and what it means for your bottom line.',
+      author: 'Agency Team',
+      category: 'ai' as const,
+      publishedAt: '2026-03-25T10:00:00.000Z',
+      featured: true,
+      order: 1,
+    },
+    {
+      title: '5 Business Processes You Should Automate Today',
+      slug: '5-business-processes-automate-today',
+      excerpt: 'From invoice processing to lead qualification, these five workflows are costing you hours every week. Learn how n8n and custom automation pipelines can eliminate manual work and reduce errors by over 90%.',
+      author: 'Agency Team',
+      category: 'ai' as const,
+      publishedAt: '2026-03-18T10:00:00.000Z',
+      featured: true,
+      order: 2,
+    },
+    {
+      title: 'The Real Cost of Web Development in 2026',
+      slug: 'real-cost-web-development-2026',
+      excerpt: 'Agency rates, freelancer quotes, and DIY builders all promise different things at wildly different price points. We compare the true cost of ownership across approaches so you can make an informed decision for your next project.',
+      author: 'Agency Team',
+      category: 'web' as const,
+      publishedAt: '2026-03-10T10:00:00.000Z',
+      featured: true,
+      order: 3,
+    },
+  ]
+
+  for (const post of blogPostsData) {
+    await payload.create({ collection: 'blog-posts', data: post })
+  }
+  console.log(`Created ${blogPostsData.length} blog posts`)
 
   console.log('Seeding complete!')
 }
