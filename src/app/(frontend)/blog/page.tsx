@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
+import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
@@ -30,8 +31,8 @@ export default async function BlogPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {(posts as any[]).map((post) => (
-              <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                <div className="p-6">
+              <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group">
+                <Link href={`/blog/${post.slug}`} className="block p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary-50 text-primary-600">
                       {post.category}
@@ -42,13 +43,13 @@ export default async function BlogPage() {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{post.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">{post.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{post.author}</span>
                     <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
                   </div>
-                </div>
+                </Link>
               </article>
             ))}
           </div>

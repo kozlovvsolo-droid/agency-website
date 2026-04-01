@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ArrowRight } from 'lucide-react'
 
 type PortfolioItem = {
   id: string
+  slug?: string | null
   title: string
   description: string
   image?: { url?: string; alt?: string } | null
@@ -92,17 +94,28 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
                       ))}
                     </div>
                   )}
-                  {item.projectUrl && (
-                    <a
-                      href={item.projectUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-3 text-sm hover:text-white"
-                      style={{ color: 'rgba(255,255,255,0.8)' }}
-                    >
-                      View Project <ExternalLink size={14} />
-                    </a>
-                  )}
+                    <div className="flex items-center gap-3 mt-3">
+                    {item.slug && (
+                      <Link
+                        href={`/portfolio/${item.slug}`}
+                        className="inline-flex items-center gap-1 text-sm hover:text-white"
+                        style={{ color: 'rgba(255,255,255,0.8)' }}
+                      >
+                        Case Study <ArrowRight size={14} />
+                      </Link>
+                    )}
+                    {item.projectUrl && (
+                      <a
+                        href={item.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm hover:text-white"
+                        style={{ color: 'rgba(255,255,255,0.6)' }}
+                      >
+                        Live <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
