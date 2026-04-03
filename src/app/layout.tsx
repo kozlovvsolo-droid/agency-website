@@ -5,20 +5,23 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 export const metadata: Metadata = {
-  title: 'Digital Agency — AI, Web Development & Automation',
-  description: 'We build digital experiences that make your business grow. AI assistants, web development, automation, and more.',
+  title: 'AI Agency \u2014 AI Solutions That Grow Your Business',
+  description:
+    'Get 30-80% more leads with AI chatbots, business automation, and smart websites. Results in weeks, not months.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'),
   openGraph: {
-    title: 'Digital Agency — AI-Powered Solutions',
-    description: 'Custom AI assistants, full-stack web development, and business automation. From idea to launch.',
+    title: 'AI Agency \u2014 Grow Your Business with AI',
+    description:
+      'Get 30-80% more leads with AI chatbots, business automation, and smart websites. Results in weeks, not months.',
     type: 'website',
     locale: 'en_US',
-    siteName: 'Digital Agency',
+    siteName: 'AI Agency',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Digital Agency — AI-Powered Solutions',
-    description: 'Custom AI assistants, full-stack web development, and business automation.',
+    title: 'AI Agency \u2014 Grow Your Business with AI',
+    description:
+      'Get 30-80% more leads with AI chatbots, business automation, and smart websites. Results in weeks, not months.',
   },
   icons: {
     icon: '/favicon.svg',

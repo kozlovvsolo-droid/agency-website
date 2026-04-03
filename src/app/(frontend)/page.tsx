@@ -11,6 +11,7 @@ import { HowItWorks } from '@/components/sections/HowItWorks'
 import { Pricing } from '@/components/sections/Pricing'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { FAQ } from '@/components/sections/FAQ'
+import { AIAnalyzer } from '@/components/sections/AIAnalyzer'
 import { Contact } from '@/components/sections/Contact'
 
 export default async function HomePage() {
@@ -45,6 +46,7 @@ export default async function HomePage() {
       <HowItWorks data={howItWorksData} />
       <Pricing plans={plansData.docs as any[]} />
       <Testimonials testimonials={testimonialsData.docs as any[]} />
+      <AIAnalyzer />
       <FAQ />
       <Contact siteSettings={siteSettings as any} />
     </main>

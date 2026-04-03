@@ -23,6 +23,16 @@ export const Services: CollectionConfig = {
     { name: 'features', type: 'array', fields: [
       { name: 'feature', type: 'text', required: true },
     ]},
+    { name: 'problemStatement', type: 'textarea', admin: { description: 'What problem does this service solve?' } },
+    { name: 'longDescription', type: 'textarea', admin: { description: 'Detailed service description for the service page' } },
+    {
+      name: 'benefits',
+      type: 'array',
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'description', type: 'textarea', required: true },
+      ],
+    },
     { name: 'order', type: 'number', defaultValue: 0, admin: { position: 'sidebar' } },
   ],
 }

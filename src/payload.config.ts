@@ -17,6 +17,7 @@ import { BlogPosts } from './collections/BlogPosts'
 import { HeroSection } from './globals/HeroSection'
 import { HowItWorks } from './globals/HowItWorks'
 import { SiteSettings } from './globals/SiteSettings'
+import { AboutPage } from './globals/AboutPage'
 import { seed } from './seed'
 
 const filename = fileURLToPath(import.meta.url)
@@ -45,7 +46,7 @@ export default buildConfig({
     ContactSubmissions,
     BlogPosts,
   ],
-  globals: [HeroSection, HowItWorks, SiteSettings],
+  globals: [HeroSection, HowItWorks, SiteSettings, AboutPage],
   db: process.env.POSTGRES_URL
     ? vercelPostgresAdapter()
     : sqliteAdapter({

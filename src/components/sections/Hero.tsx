@@ -1,115 +1,126 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Sparkles } from 'lucide-react'
 
-type Slide = {
-  title: string
-  subtitle?: string | null
-  description?: string | null
-  ctaText?: string | null
-  ctaLink?: string | null
+type HeroData = {
+  slides?:
+    | {
+        title: string
+        subtitle?: string | null
+        description?: string | null
+        ctaText?: string | null
+        ctaLink?: string | null
+      }[]
+    | null
 }
 
-const gradients = [
-  'from-primary-800 via-primary-700 to-accent-600',
-  'from-accent-600 via-primary-700 to-primary-900',
-  'from-primary-900 via-accent-600 to-primary-700',
-]
-
-export function Hero({ data }: { data: { slides?: Slide[] | null } }) {
-  const slides = data?.slides || []
-  const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    if (slides.length <= 1) return
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [slides.length])
-
-  if (slides.length === 0) return null
-
-  const slide = slides[current]
+export function Hero({ data }: { data: HeroData }) {
+  const slide = data?.slides?.[0]
+  if (!slide) return null
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-primary-950 to-gray-900" />
+      {/* Subtle grid pattern */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradients[current % gradients.length]} transition-all duration-1000`}
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
+          backgroundSize: '40px 40px',
+        }}
       />
-      <div className="absolute inset-0 bg-black/20" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32">
-        <AnimatePresence mode="wait">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
           <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto sm:mx-16 lg:mx-0 lg:ml-24"
+            transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-medium mb-6">
+              <Sparkles size={14} />
+              Trusted by 50+ businesses worldwide
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               {slide.title}
             </h1>
+
             {slide.subtitle && (
-              <p className="text-xl sm:text-2xl text-white/80 mb-4">
+              <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed max-w-xl">
                 {slide.subtitle}
               </p>
             )}
-            {slide.description && (
-              <p className="text-lg text-white/70 mb-8 max-w-2xl">
-                {slide.description}
-              </p>
-            )}
-            <div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href={slide.ctaLink || '#services'}
-                className="inline-block bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+                href={slide.ctaLink || '#analyzer'}
+                className="inline-flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:shadow-lg hover:shadow-primary-500/25"
               >
-                {slide.ctaText || 'Learn More'}
+                {slide.ctaText || 'Get Started'}
+                <ArrowRight size={20} />
+              </a>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center justify-center gap-2 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-xl text-lg font-medium transition-all"
+              >
+                See Our Results
               </a>
             </div>
           </motion.div>
-        </AnimatePresence>
-      </div>
 
-      {slides.length > 1 && (
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`w-3 h-3 rounded-full transition-all ${
-                i === current ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60'
-              }`}
-            />
-          ))}
+          {/* Right: Visual element - animated stats cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="hidden lg:grid grid-cols-2 gap-4"
+          >
+            {[
+              {
+                value: '80%',
+                label: 'Inquiries automated',
+                color: 'from-primary-500 to-primary-600',
+              },
+              {
+                value: '3x',
+                label: 'More leads generated',
+                color: 'from-accent-500 to-accent-600',
+              },
+              {
+                value: '20h+',
+                label: 'Saved per week',
+                color: 'from-emerald-500 to-emerald-600',
+              },
+              {
+                value: '2 wk',
+                label: 'Average setup time',
+                color: 'from-amber-500 to-amber-600',
+              },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors"
+              >
+                <div
+                  className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1`}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      )}
-
-      {slides.length > 1 && (
-        <button
-          onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}
-          aria-label="Previous slide"
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-20"
-        >
-          <ChevronLeft size={24} />
-        </button>
-      )}
-
-      {slides.length > 1 && (
-        <button
-          onClick={() => setCurrent((current + 1) % slides.length)}
-          aria-label="Next slide"
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-20"
-        >
-          <ChevronRight size={24} />
-        </button>
-      )}
+      </div>
     </section>
   )
 }

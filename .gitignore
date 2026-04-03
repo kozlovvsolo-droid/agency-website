@@ -6,3 +6,4 @@ media/
 src/payload-types.ts
 .vercel
 .env*.local
+payload.db

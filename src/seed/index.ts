@@ -16,108 +16,60 @@ export async function seed(payload: Payload) {
   // 2. Create services
   const servicesData = [
     {
-      title: 'AI Assistants & Chatbots',
-      slug: 'ai-assistants',
-      subtitle: 'Intelligent Virtual Helpers',
-      description: 'Custom AI-powered assistants and chatbots that understand your business context, handle customer inquiries, and automate repetitive tasks around the clock.',
+      title: 'AI Chatbots & Automation',
+      slug: 'ai-chatbots',
+      subtitle: 'Your 24/7 AI Employee',
+      description:
+        'Your AI assistant handles 80% of customer inquiries 24/7. No breaks, no sick days, any language.',
       icon: 'brain' as const,
       features: [
-        { feature: 'Custom GPT-powered chatbots' },
-        { feature: 'Multi-language support' },
-        { feature: '24/7 customer support automation' },
+        { feature: 'Handles 80% of support tickets automatically' },
+        { feature: 'Speaks every language your customers do' },
+        { feature: 'Pays for itself within the first month' },
       ],
       order: 1,
     },
     {
-      title: 'Mobile Applications',
-      slug: 'mobile-apps',
-      subtitle: 'iOS & Android',
-      description: 'Native and cross-platform mobile applications with modern UI/UX, AI integration, and seamless backend connectivity for your business needs.',
-      icon: 'smartphone' as const,
+      title: 'Website Development',
+      slug: 'websites',
+      subtitle: 'Websites That Sell',
+      description:
+        'A website that actually converts visitors into paying customers. Fast, SEO-optimized, built to sell.',
+      icon: 'globe' as const,
       features: [
-        { feature: 'React Native / Flutter' },
-        { feature: 'AI-enhanced features' },
-        { feature: 'App Store optimization' },
+        { feature: 'Converts 2-3x more visitors into leads' },
+        { feature: 'Loads in under 2 seconds on any device' },
+        { feature: 'Ranks on Google from day one' },
       ],
       order: 2,
     },
     {
-      title: 'Full-Stack Web Development',
-      slug: 'web-development',
-      subtitle: 'Modern Web Applications',
-      description: 'High-performance web applications built with Next.js, React, and TypeScript. From landing pages to complex SaaS platforms with scalable architecture.',
-      icon: 'globe' as const,
+      title: 'Marketing & Lead Generation',
+      slug: 'marketing',
+      subtitle: 'Leads on Autopilot',
+      description:
+        'A steady stream of qualified leads every month. AI-powered targeting that finds the right people.',
+      icon: 'megaphone' as const,
       features: [
-        { feature: 'Next.js + React + TypeScript' },
-        { feature: 'Headless CMS integration' },
-        { feature: 'SEO & Core Web Vitals' },
+        { feature: 'Generates 30-80% more qualified leads' },
+        { feature: 'Reduces cost per lead by up to 50%' },
+        { feature: 'Targets the right audience automatically' },
       ],
       order: 3,
     },
     {
-      title: 'WordPress & WooCommerce',
-      slug: 'wordpress',
-      subtitle: 'Content & E-commerce',
-      description: 'Professional WordPress sites and WooCommerce stores with custom themes, plugins, and performance optimization for content-driven businesses.',
-      icon: 'layout' as const,
-      features: [
-        { feature: 'Custom themes & plugins' },
-        { feature: 'WooCommerce stores' },
-        { feature: 'Migration & optimization' },
-      ],
-      order: 4,
-    },
-    {
-      title: 'Business Automation',
+      title: 'Business Process Automation',
       slug: 'automation',
-      subtitle: 'Streamline Your Processes',
-      description: 'End-to-end business process automation using n8n, Zapier, and custom workflows. Connect your tools, eliminate manual work, and scale operations.',
+      subtitle: 'Work Smarter, Not Harder',
+      description:
+        'Save 20+ hours every week. Connect your tools, eliminate manual work, scale without hiring.',
       icon: 'zap' as const,
       features: [
-        { feature: 'n8n & Zapier workflows' },
-        { feature: 'CRM & ERP integration' },
-        { feature: 'Custom API development' },
+        { feature: 'Saves 20+ hours of manual work per week' },
+        { feature: 'Eliminates 95% of data entry errors' },
+        { feature: 'Scales your operations without new hires' },
       ],
-      order: 5,
-    },
-    {
-      title: '3D Configurators',
-      slug: '3d-configurators',
-      subtitle: 'Interactive Product Visualization',
-      description: 'AI-driven 3D product configurators that let customers visualize and customize products in real-time, increasing engagement and reducing returns.',
-      icon: 'box' as const,
-      features: [
-        { feature: 'Real-time 3D rendering' },
-        { feature: 'AI-powered recommendations' },
-        { feature: 'E-commerce integration' },
-      ],
-      order: 6,
-    },
-    {
-      title: '3D Design & Visualization',
-      slug: '3d-design',
-      subtitle: 'Stunning Visual Content',
-      description: 'Professional 3D modeling, rendering, and animation for product visualization, architectural projects, and marketing materials that captivate audiences.',
-      icon: 'palette' as const,
-      features: [
-        { feature: 'Product visualization' },
-        { feature: 'Architectural rendering' },
-        { feature: 'Animation & motion' },
-      ],
-      order: 7,
-    },
-    {
-      title: 'Digital Marketing & SEO',
-      slug: 'digital-marketing',
-      subtitle: 'Growth & Visibility',
-      description: 'Data-driven digital marketing strategies including SEO, content marketing, social media, and paid advertising to grow your online presence and revenue.',
-      icon: 'megaphone' as const,
-      features: [
-        { feature: 'SEO & content strategy' },
-        { feature: 'Social media management' },
-        { feature: 'PPC & analytics' },
-      ],
-      order: 8,
+      order: 4,
     },
   ]
 
@@ -133,8 +85,9 @@ export async function seed(payload: Payload) {
     {
       title: 'AI Customer Support for E-commerce',
       slug: 'ai-support-ecommerce',
-      category: createdServices['ai-assistants'],
-      description: 'Built a multi-language AI chatbot handling 80% of customer inquiries for a Nordic e-commerce brand, reducing support costs by 60%.',
+      category: createdServices['ai-chatbots'],
+      description:
+        '80% of customer inquiries handled automatically, 60% reduction in support costs, ROI visible in first month. Multi-language AI chatbot deployed for a Nordic e-commerce brand.',
       technologies: [{ tech: 'GPT-4' }, { tech: 'Python' }, { tech: 'Next.js' }],
       clientName: 'Nordic Retail Group',
       featured: true,
@@ -143,52 +96,35 @@ export async function seed(payload: Payload) {
     {
       title: 'SaaS Platform for HR Management',
       slug: 'hr-saas-platform',
-      category: createdServices['web-development'],
-      description: 'Full-stack HR management platform with recruitment tracking, employee onboarding, and performance analytics built on Next.js and Payload CMS.',
+      category: createdServices['websites'],
+      description:
+        'Full HR management platform launched in 8 weeks. 3x faster employee onboarding, 50% less admin time. Built on Next.js and Payload CMS with AI-powered analytics.',
       technologies: [{ tech: 'Next.js' }, { tech: 'Payload CMS' }, { tech: 'PostgreSQL' }],
       clientName: 'TalentFlow Inc.',
       featured: true,
       order: 2,
     },
     {
-      title: 'Furniture 3D Configurator',
-      slug: 'furniture-configurator',
-      category: createdServices['3d-configurators'],
-      description: 'Interactive 3D configurator allowing customers to customize furniture pieces in real-time, with AR preview capability and direct checkout integration.',
-      technologies: [{ tech: 'Three.js' }, { tech: 'React' }, { tech: 'WebGL' }],
-      clientName: 'ModernHome Design',
+      title: 'Logistics Automation System',
+      slug: 'logistics-automation',
+      category: createdServices['automation'],
+      description:
+        '95% reduction in manual data entry, 70% faster order processing, saving 200+ hours per month. End-to-end logistics automation connecting warehouse, shipping, and CRM systems.',
+      technologies: [{ tech: 'n8n' }, { tech: 'Node.js' }, { tech: 'REST APIs' }],
+      clientName: 'FastShip Logistics',
       featured: true,
       order: 3,
     },
     {
-      title: 'Logistics Automation System',
-      slug: 'logistics-automation',
-      category: createdServices['automation'],
-      description: 'End-to-end logistics automation connecting warehouse, shipping, and CRM systems. Reduced manual data entry by 95% and order processing time by 70%.',
-      technologies: [{ tech: 'n8n' }, { tech: 'Node.js' }, { tech: 'REST APIs' }],
-      clientName: 'FastShip Logistics',
-      featured: true,
-      order: 4,
-    },
-    {
-      title: 'Restaurant Chain Mobile App',
-      slug: 'restaurant-mobile-app',
-      category: createdServices['mobile-apps'],
-      description: 'Cross-platform mobile app for a restaurant chain featuring online ordering, loyalty program, table reservations, and AI-powered menu recommendations.',
-      technologies: [{ tech: 'React Native' }, { tech: 'Firebase' }, { tech: 'Stripe' }],
-      clientName: 'Urban Bites',
-      featured: true,
-      order: 5,
-    },
-    {
       title: 'Real Estate Marketing Campaign',
       slug: 'real-estate-marketing',
-      category: createdServices['digital-marketing'],
-      description: 'Comprehensive digital marketing campaign for luxury real estate, achieving 340% ROI through targeted SEO, social media, and 3D virtual tours.',
+      category: createdServices['marketing'],
+      description:
+        '340% ROI from digital campaign, 5x increase in qualified leads, #1 Google ranking for target keywords. Comprehensive strategy combining SEO, paid ads, and 3D virtual tours.',
       technologies: [{ tech: 'Google Ads' }, { tech: 'SEO' }, { tech: '3D Tours' }],
       clientName: 'Prestige Properties',
       featured: true,
-      order: 6,
+      order: 4,
     },
   ]
 
@@ -200,10 +136,11 @@ export async function seed(payload: Payload) {
   // 4. Create testimonials
   const testimonialsData = [
     {
-      clientName: 'Erik Lindström',
+      clientName: 'Erik Lindstrom',
       clientRole: 'CEO',
       company: 'Nordic Retail Group',
-      quote: 'The AI chatbot they built handles 80% of our customer inquiries now. Our support team can finally focus on complex issues instead of repetitive questions. The ROI was visible within the first month.',
+      quote:
+        'The AI chatbot handles 80% of our 2,000+ monthly inquiries now. Our support costs dropped 60% in the first month, and customer satisfaction actually went up by 15 points. Best investment we made this year.',
       rating: 5,
       featured: true,
     },
@@ -211,15 +148,17 @@ export async function seed(payload: Payload) {
       clientName: 'Sarah Chen',
       clientRole: 'CTO',
       company: 'TalentFlow Inc.',
-      quote: 'They delivered our HR platform ahead of schedule and the code quality was exceptional. The Payload CMS integration makes it incredibly easy for our team to manage content without developer help.',
+      quote:
+        'They delivered our HR platform in 8 weeks instead of the 16 we expected. Employee onboarding went from 5 days to under 2, and our HR team saves 20 hours per week on admin tasks. The code quality is exceptional.',
       rating: 5,
       featured: true,
     },
     {
       clientName: 'Marco Rossi',
       clientRole: 'Founder',
-      company: 'ModernHome Design',
-      quote: 'The 3D configurator transformed our online sales. Customers spend 3x more time on our site and our return rate dropped by 40%. Best investment we\'ve made in years.',
+      company: 'Prestige Properties',
+      quote:
+        'Our digital campaign delivered 340% ROI in 3 months. We went from 12 leads per month to over 60 qualified ones, and we hit #1 on Google for our target keywords. The results speak for themselves.',
       rating: 5,
       featured: true,
     },
@@ -227,7 +166,8 @@ export async function seed(payload: Payload) {
       clientName: 'Anna Kowalska',
       clientRole: 'Operations Director',
       company: 'FastShip Logistics',
-      quote: 'The automation workflows they set up with n8n saved us hundreds of hours per month. What used to take a team of 5 people now runs completely on autopilot.',
+      quote:
+        'The automation workflows save us 200+ hours every month. Order processing is 70% faster, data entry errors dropped to near zero, and we did it all without hiring a single new person.',
       rating: 5,
       featured: true,
     },
@@ -241,54 +181,54 @@ export async function seed(payload: Payload) {
   // 5. Create pricing plans
   const plansData = [
     {
-      name: 'Starter',
+      name: 'Launch',
       price: '$2,999',
       period: ' one-time',
-      description: 'Perfect for small businesses getting started with digital presence',
+      description: 'Get online and start converting',
       features: [
-        { feature: 'Landing page or simple website', included: true },
-        { feature: 'Mobile responsive design', included: true },
-        { feature: 'Basic SEO setup', included: true },
-        { feature: 'Contact form', included: true },
-        { feature: 'CMS integration', included: false },
-        { feature: 'Custom AI features', included: false },
-        { feature: 'Ongoing support', included: false },
+        { feature: 'Conversion-optimized website', included: true },
+        { feature: 'Mobile-first responsive design', included: true },
+        { feature: 'SEO setup so Google finds you', included: true },
+        { feature: 'Lead capture forms that convert', included: true },
+        { feature: 'AI chatbot integration', included: false },
+        { feature: 'Business process automation', included: false },
+        { feature: 'Ongoing optimization', included: false },
       ],
       highlighted: false,
       ctaText: 'Get Started',
       order: 1,
     },
     {
-      name: 'Professional',
-      price: '$9,999',
+      name: 'Grow',
+      price: '$7,999',
       period: ' one-time',
-      description: 'Full-featured solution for growing businesses',
+      description: 'AI chatbot + automation included',
       features: [
-        { feature: 'Multi-page website or web app', included: true },
-        { feature: 'Mobile responsive design', included: true },
-        { feature: 'Advanced SEO optimization', included: true },
-        { feature: 'Payload CMS integration', included: true },
-        { feature: 'AI chatbot integration', included: true },
-        { feature: 'Business automation (n8n)', included: true },
-        { feature: '3 months support included', included: true },
+        { feature: 'Everything in Launch', included: true },
+        { feature: 'AI handles 80% of inquiries', included: true },
+        { feature: 'Automated lead qualification', included: true },
+        { feature: 'CRM and tools connected', included: true },
+        { feature: 'Multi-language AI support', included: true },
+        { feature: '20+ hours saved per week', included: true },
+        { feature: '3 months of support included', included: true },
       ],
       highlighted: true,
       ctaText: 'Most Popular',
       order: 2,
     },
     {
-      name: 'Enterprise',
+      name: 'Scale',
       price: 'Custom',
       period: '',
-      description: 'Tailored solutions for large-scale projects',
+      description: 'Full AI transformation for your business',
       features: [
-        { feature: 'Custom web application / SaaS', included: true },
-        { feature: 'Mobile app (iOS + Android)', included: true },
-        { feature: 'Full AI integration suite', included: true },
-        { feature: 'Headless CMS + Commerce', included: true },
-        { feature: 'Advanced automation workflows', included: true },
-        { feature: '3D configurator / visualization', included: true },
-        { feature: 'Dedicated team + ongoing support', included: true },
+        { feature: 'Everything in Grow', included: true },
+        { feature: 'Custom AI agents for your workflows', included: true },
+        { feature: 'Full business process automation', included: true },
+        { feature: 'Advanced analytics dashboard', included: true },
+        { feature: 'Multi-platform integration', included: true },
+        { feature: 'Dedicated team and priority support', included: true },
+        { feature: 'Ongoing optimization and scaling', included: true },
       ],
       highlighted: false,
       ctaText: 'Contact Us',
@@ -307,25 +247,12 @@ export async function seed(payload: Payload) {
     data: {
       slides: [
         {
-          title: 'Digital Experiences That Make Your Business Grow',
-          subtitle: 'AI-Powered Solutions for the Modern Enterprise',
-          description: 'We combine cutting-edge AI, modern web technologies, and automation to build digital products that drive real business results.',
-          ctaText: 'Explore Our Services',
-          ctaLink: '#services',
-        },
-        {
-          title: 'From Idea to Launch — Full-Stack Development',
-          subtitle: 'Next.js • React • TypeScript • Payload CMS',
-          description: 'We build fast, scalable, and maintainable web applications using the most modern technology stack available today.',
-          ctaText: 'See Our Work',
-          ctaLink: '#portfolio',
-        },
-        {
-          title: 'Automate Everything. Scale Without Limits.',
-          subtitle: 'n8n Workflows • AI Agents • API Integration',
-          description: 'Eliminate manual work, connect your tools, and let intelligent automation handle the rest. Save hundreds of hours every month.',
-          ctaText: 'View Pricing',
-          ctaLink: '#pricing',
+          title: 'Your Competitors Are Already Using AI. Are You?',
+          subtitle:
+            'We help businesses get 30-80% more leads with AI chatbots, automation, and smart websites \u2014 in weeks, not months',
+          description: null,
+          ctaText: 'Get Your Free AI Audit',
+          ctaLink: '#analyzer',
         },
       ],
     },
@@ -337,30 +264,35 @@ export async function seed(payload: Payload) {
     slug: 'how-it-works',
     data: {
       title: 'How It Works',
-      subtitle: 'Our proven process ensures your project is delivered on time, on budget, and beyond expectations.',
+      subtitle:
+        'Our proven process ensures your project is delivered on time, on budget, and beyond expectations.',
       steps: [
         {
           stepNumber: 1,
           title: 'Consultation',
-          description: 'We start with a deep dive into your business goals, challenges, and vision. Understanding your needs is the foundation of every successful project.',
+          description:
+            'We start with a deep dive into your business goals, challenges, and vision. Understanding your needs is the foundation of every successful project.',
           icon: 'message-circle',
         },
         {
           stepNumber: 2,
           title: 'Strategy & Planning',
-          description: 'Our team creates a detailed roadmap with clear milestones, technology recommendations, and a realistic timeline for your project.',
+          description:
+            'Our team creates a detailed roadmap with clear milestones, technology recommendations, and a realistic timeline for your project.',
           icon: 'clipboard',
         },
         {
           stepNumber: 3,
           title: 'Development',
-          description: 'We build your solution iteratively with regular demos and feedback cycles. You see real progress every week, not just at the end.',
+          description:
+            'We build your solution iteratively with regular demos and feedback cycles. You see real progress every week, not just at the end.',
           icon: 'code',
         },
         {
           stepNumber: 4,
           title: 'Launch & Support',
-          description: 'After thorough testing and your approval, we launch your project and provide ongoing support to ensure long-term success.',
+          description:
+            'After thorough testing and your approval, we launch your project and provide ongoing support to ensure long-term success.',
           icon: 'rocket',
         },
       ],
@@ -372,18 +304,18 @@ export async function seed(payload: Payload) {
   await payload.updateGlobal({
     slug: 'site-settings',
     data: {
-      siteName: 'Digital Agency',
-      tagline: 'AI, Web Development & Automation',
-      contactEmail: 'hello@agency.com',
-      contactPhone: '+1 (555) 000-0000',
-      address: 'Remote — Working Worldwide',
+      siteName: 'AI Agency',
+      tagline: 'AI Solutions That Grow Your Business',
+      contactEmail: 'hello@aiadvisors.pl',
+      contactPhone: '+47 XXX XX XXX',
+      address: 'Oslo, Norway \u2014 Working Worldwide',
       socialLinks: {
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         instagram: 'https://instagram.com',
       },
       footer: {
-        copyrightText: '© 2026 Digital Agency. All rights reserved.',
+        copyrightText: '\u00a9 2026 AI Agency. All rights reserved.',
         showSocialLinks: true,
       },
     },
@@ -395,7 +327,8 @@ export async function seed(payload: Payload) {
     {
       title: 'How an AI Chatbot Can Replace Your Support Team',
       slug: 'ai-chatbot-replace-support-team',
-      excerpt: 'Modern AI chatbots can handle up to 80% of routine customer inquiries without human intervention. We break down the real-world results from deploying AI support across multiple industries and what it means for your bottom line.',
+      excerpt:
+        'One of our clients cut support costs by 60% in 30 days. Here is exactly how an AI chatbot handles 80% of customer inquiries \u2014 and what it means for your bottom line.',
       author: 'Agency Team',
       category: 'ai' as const,
       publishedAt: '2026-03-25T10:00:00.000Z',
@@ -405,7 +338,8 @@ export async function seed(payload: Payload) {
     {
       title: '5 Business Processes You Should Automate Today',
       slug: '5-business-processes-automate-today',
-      excerpt: 'From invoice processing to lead qualification, these five workflows are costing you hours every week. Learn how n8n and custom automation pipelines can eliminate manual work and reduce errors by over 90%.',
+      excerpt:
+        'These five manual workflows are costing you 20+ hours every week. See how businesses are saving 200+ hours per month with automation \u2014 and how you can start this week.',
       author: 'Agency Team',
       category: 'ai' as const,
       publishedAt: '2026-03-18T10:00:00.000Z',
@@ -415,7 +349,8 @@ export async function seed(payload: Payload) {
     {
       title: 'The Real Cost of Web Development in 2026',
       slug: 'real-cost-web-development-2026',
-      excerpt: 'Agency rates, freelancer quotes, and DIY builders all promise different things at wildly different price points. We compare the true cost of ownership across approaches so you can make an informed decision for your next project.',
+      excerpt:
+        'Agency quotes range from $2K to $200K for the same project. We break down the true cost of ownership across agencies, freelancers, and DIY \u2014 so you know exactly what you are paying for.',
       author: 'Agency Team',
       category: 'web' as const,
       publishedAt: '2026-03-10T10:00:00.000Z',
@@ -428,6 +363,37 @@ export async function seed(payload: Payload) {
     await payload.create({ collection: 'blog-posts', data: post })
   }
   console.log(`Created ${blogPostsData.length} blog posts`)
+
+  // 10. Seed About Page
+  await payload.updateGlobal({
+    slug: 'about-page',
+    data: {
+      headline: 'We Help Businesses Grow with AI',
+      story: 'We started this agency with a simple belief: AI should work for every business, not just tech giants. Our team combines deep expertise in artificial intelligence, web development, and business strategy to deliver solutions that actually move the needle. We have helped 50+ companies automate their operations, generate more leads, and scale without hiring armies of people. Every project starts with understanding your business — not selling you technology.',
+      mission: 'To make AI accessible and profitable for every business, regardless of size or industry.',
+      team: [
+        {
+          name: 'Anton',
+          role: 'Co-Founder & AI Architect',
+          bio: 'Full-stack developer and AI specialist with a passion for building systems that automate business growth. Expert in n8n workflows, chatbot development, and web applications.',
+          linkedin: 'https://linkedin.com',
+        },
+        {
+          name: 'Partner',
+          role: 'Co-Founder & Business Strategist',
+          bio: 'Business development expert who bridges the gap between technology and business results. Focused on ensuring every AI implementation delivers measurable ROI.',
+          linkedin: 'https://linkedin.com',
+        },
+      ],
+      values: [
+        { title: 'Results Over Technology', description: 'We don\'t sell AI for the sake of AI. Every recommendation is backed by projected ROI and clear business impact.', icon: 'target' },
+        { title: 'Speed of Delivery', description: 'First results in 2 weeks, not 6 months. We move fast because your business can\'t wait.', icon: 'zap' },
+        { title: 'Transparency', description: 'Clear pricing, honest timelines, regular updates. You always know exactly where your project stands.', icon: 'shield-check' },
+        { title: 'Long-Term Partnership', description: 'We don\'t disappear after launch. Ongoing support, optimization, and scaling as your business grows.', icon: 'handshake' },
+      ],
+    },
+  })
+  console.log('Seeded About Page')
 
   console.log('Seeding complete!')
 }

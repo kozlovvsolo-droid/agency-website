@@ -7,34 +7,34 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const faqItems = [
   {
-    question: 'What services do you offer?',
+    question: 'How quickly can we see results?',
     answer:
-      'We specialize in AI-powered solutions, full-stack web development, mobile apps, business automation, 3D configurators, and digital marketing. Each service is tailored to your business needs.',
+      'Most clients see their first AI automation working within 2 weeks. A basic chatbot can be live in days. Full website + automation projects typically take 4-8 weeks from kickoff to launch, with measurable results from month one.',
   },
   {
-    question: 'How much does a project cost?',
+    question: 'Will the AI chatbot sound robotic?',
     answer:
-      'Our pricing starts at $750 for simple projects and goes up to $9,999+ for complex solutions. Enterprise projects are custom-quoted. We offer transparent pricing with detailed breakdowns.',
+      'No. Modern AI assistants are trained on your business context, tone of voice, and actual customer conversations. They handle nuanced questions, switch between languages naturally, and know when to escalate to a human. Most customers cannot tell the difference.',
   },
   {
-    question: 'How long does development take?',
+    question: 'What if we already have a website?',
     answer:
-      'Timeline depends on scope. Simple projects take 2-4 weeks, standard projects 4-8 weeks, and complex solutions 8-16 weeks. We provide a detailed timeline during the initial consultation.',
+      'We can add AI chatbot and automation to your existing site without rebuilding it. We integrate with WordPress, Shopify, custom platforms, and practically any modern website. If your site needs a refresh, we can handle that too.',
   },
   {
-    question: 'Do you provide ongoing support?',
+    question: 'How much does it cost?',
     answer:
-      'Yes! We offer support packages ranging from email support to dedicated team access. After launch, we ensure your solution runs smoothly with regular updates and maintenance.',
+      'Our packages start at $2,999 for a conversion-optimized website. The Grow package ($7,999) includes AI chatbot + business automation and is our most popular option. Enterprise projects are custom-quoted based on scope. Every project includes a clear ROI projection before you commit.',
   },
   {
-    question: 'What technologies do you use?',
+    question: 'Do we need technical knowledge?',
     answer:
-      'We use modern tech stack: Next.js, React, TypeScript, Payload CMS, n8n, PostgreSQL, and AWS. We choose the best tools for your specific project requirements.',
+      'Not at all. We handle everything from setup to deployment. You get a simple dashboard to manage content, and the AI runs on autopilot. Our team provides training and ongoing support so your team feels confident from day one.',
   },
   {
-    question: 'How do we get started?',
+    question: 'What happens after launch?',
     answer:
-      'Book a free 30-minute consultation with our team. We\'ll discuss your goals, challenges, and provide a roadmap with timeline and pricing. No commitment needed.',
+      'Every package includes support. We monitor performance, optimize the AI based on real conversations, and iterate on what works. The Grow and Scale packages include extended support periods. We treat launch as the starting line, not the finish line.',
   },
 ]
 

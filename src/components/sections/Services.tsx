@@ -22,6 +22,7 @@ type Service = {
   subtitle?: string | null
   description: string
   icon: string
+  slug: string
   features?: { feature: string }[] | null
 }
 
@@ -60,7 +61,7 @@ export function Services({ services }: { services: Service[] }) {
                   </ul>
                 )}
                 <a
-                  href="#contact"
+                  href={`/services/${service.slug}`}
                   className="inline-flex items-center gap-1.5 mt-5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors group-hover:gap-2.5"
                 >
                   Learn More <ArrowRight size={14} className="transition-all" />

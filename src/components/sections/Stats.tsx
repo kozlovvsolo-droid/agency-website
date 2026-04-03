@@ -5,10 +5,10 @@ import { motion, useInView } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
 
 const stats = [
-  { value: 150, label: 'Projects Completed', suffix: '+' },
-  { value: 50, label: 'Happy Clients', suffix: '+' },
-  { value: 99, label: 'Client Satisfaction', suffix: '%' },
-  { value: 24, label: 'Hours Support', suffix: '/7' },
+  { value: 80, label: 'Avg. Inquiry Automation', suffix: '%' },
+  { value: 3, label: 'Average Lead Increase', suffix: 'x' },
+  { value: 20, label: 'Hours Saved Per Week', suffix: '+' },
+  { value: 14, label: 'Days to First Results', suffix: '' },
 ]
 
 function StatCounter({ value, label, suffix }: { value: number; label: string; suffix: string }) {
@@ -19,7 +19,6 @@ function StatCounter({ value, label, suffix }: { value: number; label: string; s
   useEffect(() => {
     if (!isInView) return
 
-    let start = 0
     const duration = 2000
     const increment = value / (duration / 16)
     let current = 0

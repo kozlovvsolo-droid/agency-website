@@ -17,7 +17,7 @@ export function TrustedBy() {
       <Container>
         <SectionHeading
           title="Trusted By Industry Leaders"
-          subtitle="50+ companies worldwide trust us with their digital transformation"
+          subtitle="Companies that automated their growth with our AI solutions"
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
           {companies.map((company) => (
