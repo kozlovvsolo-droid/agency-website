@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
@@ -8,19 +9,47 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { ArrowLeft, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+async function getService(slug: string) {
   const payload = await getPayload({ config: configPromise })
-
   const { docs } = await payload.find({
     collection: 'services',
     where: { slug: { equals: slug } },
     limit: 1,
   })
+  return docs[0] as any | null
+}
 
-  if (!docs.length) notFound()
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const service = await getService(slug)
+  if (!service) return { title: 'Service Not Found' }
 
-  const service = docs[0] as any
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'
+
+  return {
+    title: `${service.title} — AI Agency`,
+    description: service.description?.slice(0, 160) || service.title,
+    alternates: { canonical: `${baseUrl}/services/${slug}` },
+    openGraph: {
+      title: service.title,
+      description: service.description?.slice(0, 160) || service.title,
+      type: 'website',
+      url: `${baseUrl}/services/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: service.title,
+      description: service.description?.slice(0, 160) || service.title,
+    },
+  }
+}
+
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const payload = await getPayload({ config: configPromise })
+
+  const service = await getService(slug)
+  if (!service) notFound()
 
   const { docs: relatedWork } = await payload.find({
     collection: 'portfolio',
@@ -28,8 +57,27 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     limit: 3,
   })
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'AI Agency',
+      url: baseUrl,
+    },
+  }
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <section className="pt-32 pb-16 bg-gradient-to-br from-primary-900 to-accent-600">
         <Container>

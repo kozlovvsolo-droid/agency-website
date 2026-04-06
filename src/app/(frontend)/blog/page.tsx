@@ -1,23 +1,35 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
-export const metadata = {
-  title: 'Blog — Latest Insights',
+export const metadata: Metadata = {
+  title: 'Blog — AI Agency Insights',
   description: 'Read our latest articles on AI, web development, automation, and digital transformation.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Blog — AI Agency Insights',
+    description: 'Read our latest articles on AI, web development, automation, and digital transformation.',
+    type: 'website',
+  },
 }
 
-export default async function BlogPage() {
+const POSTS_PER_PAGE = 12
+
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page: pageParam } = await searchParams
+  const currentPage = Math.max(1, parseInt(pageParam || '1', 10))
   const payload = await getPayload({ config: configPromise })
 
-  const { docs: posts } = await payload.find({
+  const { docs: posts, totalPages } = await payload.find({
     collection: 'blog-posts',
     sort: '-publishedAt',
-    limit: 20,
+    limit: POSTS_PER_PAGE,
+    page: currentPage,
   })
 
   return (
@@ -27,6 +39,7 @@ export default async function BlogPage() {
           <SectionHeading
             title="Blog"
             subtitle="Latest insights on AI, web development, and digital transformation"
+            as="h1"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -43,7 +56,7 @@ export default async function BlogPage() {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">{post.title}</h3>
+                  <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">{post.title}</h2>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{post.author}</span>
@@ -57,6 +70,41 @@ export default async function BlogPage() {
           {posts.length === 0 && (
             <div className="text-center py-16">
               <p className="text-gray-600">No blog posts yet. Check back soon!</p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-12">
+              {currentPage > 1 && (
+                <Link
+                  href={`/blog?page=${currentPage - 1}`}
+                  className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                >
+                  Previous
+                </Link>
+              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Link
+                  key={page}
+                  href={`/blog?page=${page}`}
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-medium transition ${
+                    page === currentPage
+                      ? 'bg-primary-600 text-white'
+                      : 'border border-gray-200 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {page}
+                </Link>
+              ))}
+              {currentPage < totalPages && (
+                <Link
+                  href={`/blog?page=${currentPage + 1}`}
+                  className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                >
+                  Next
+                </Link>
+              )}
             </div>
           )}
         </Container>

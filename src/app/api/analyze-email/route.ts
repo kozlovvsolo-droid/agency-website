@@ -6,8 +6,8 @@ export async function POST(request: Request) {
   try {
     const { email, url, score } = await request.json()
 
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 })
+    if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: 'Valid email is required' }, { status: 400 })
     }
 
     const payload = await getPayload({ config: configPromise })

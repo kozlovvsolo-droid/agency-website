@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Star, Quote } from 'lucide-react'
@@ -39,7 +40,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
               )}
               <div className="flex items-center gap-3">
                 {t.avatar?.url ? (
-                  <img src={t.avatar.url} alt={t.clientName} className="w-12 h-12 rounded-full object-cover" />
+                  <Image src={t.avatar.url} alt={t.clientName} width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
                 ) : (
                   <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-bold">
                     {t.clientName.charAt(0)}

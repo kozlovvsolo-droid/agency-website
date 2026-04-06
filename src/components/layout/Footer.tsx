@@ -53,9 +53,16 @@ export function Footer({ siteSettings }: { siteSettings?: { siteName?: string; c
           <div>
             <h4 className="text-white font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
-              {['AI Solutions', 'Web Development', 'Mobile Apps', 'Automation'].map((item) => (
-                <li key={item}>
-                  <span className="text-gray-400">{item}</span>
+              {[
+                { label: 'AI Chatbots', slug: 'ai-chatbots' },
+                { label: 'Web Development', slug: 'websites' },
+                { label: 'Marketing', slug: 'marketing' },
+                { label: 'Automation', slug: 'automation' },
+              ].map((item) => (
+                <li key={item.slug}>
+                  <a href={`/services/${item.slug}`} className="text-gray-400 hover:text-white transition-colors">
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>

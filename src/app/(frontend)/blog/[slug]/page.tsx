@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
@@ -14,22 +15,117 @@ const categoryLabels: Record<string, string> = {
   'case-study': 'Case Study',
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+async function getPost(slug: string) {
   const payload = await getPayload({ config: configPromise })
-
   const { docs } = await payload.find({
     collection: 'blog-posts',
     where: { slug: { equals: slug } },
     limit: 1,
   })
+  return docs[0] as any | null
+}
 
-  if (!docs.length) notFound()
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await getPost(slug)
+  if (!post) return { title: 'Post Not Found' }
 
-  const post = docs[0] as any
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'
+
+  return {
+    title: `${post.title} — AI Agency Blog`,
+    description: post.excerpt || post.title,
+    alternates: { canonical: `${baseUrl}/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || post.title,
+      type: 'article',
+      publishedTime: post.publishedAt,
+      authors: [post.author || 'Agency Team'],
+      url: `${baseUrl}/blog/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || post.title,
+    },
+  }
+}
+
+function renderRichText(content: any): React.ReactNode {
+  if (typeof content === 'string') return content
+
+  if (!content?.root?.children) {
+    return 'Full article content available in the admin panel.'
+  }
+
+  const renderChildren = (children: any[]): React.ReactNode[] =>
+    children.map((node: any, i: number) => {
+      if (node.type === 'text') {
+        let text: React.ReactNode = node.text
+        if (node.format & 1) text = <strong key={i}>{text}</strong>
+        if (node.format & 2) text = <em key={i}>{text}</em>
+        if (node.format & 8) text = <code key={i} className="bg-gray-100 px-1.5 py-0.5 rounded text-sm">{text}</code>
+        return <span key={i}>{text}</span>
+      }
+      if (node.type === 'paragraph') {
+        return <p key={i} className="mb-4 text-gray-700 leading-relaxed">{node.children ? renderChildren(node.children) : null}</p>
+      }
+      if (node.type === 'heading') {
+        const level = node.tag || 'h2'
+        const Tag = level as keyof JSX.IntrinsicElements
+        return <Tag key={i} className="font-bold text-gray-900 mt-8 mb-4">{node.children ? renderChildren(node.children) : null}</Tag>
+      }
+      if (node.type === 'list') {
+        const ListTag = node.listType === 'number' ? 'ol' : 'ul'
+        return <ListTag key={i} className={`mb-4 pl-6 ${node.listType === 'number' ? 'list-decimal' : 'list-disc'} text-gray-700`}>{node.children ? renderChildren(node.children) : null}</ListTag>
+      }
+      if (node.type === 'listitem') {
+        return <li key={i} className="mb-1">{node.children ? renderChildren(node.children) : null}</li>
+      }
+      if (node.type === 'link') {
+        return <a key={i} href={node.fields?.url || '#'} className="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">{node.children ? renderChildren(node.children) : null}</a>
+      }
+      if (node.type === 'quote') {
+        return <blockquote key={i} className="border-l-4 border-primary-500 pl-4 italic text-gray-600 my-4">{node.children ? renderChildren(node.children) : null}</blockquote>
+      }
+      if (node.children) return <div key={i}>{renderChildren(node.children)}</div>
+      return null
+    })
+
+  return renderChildren(content.root.children)
+}
+
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getPost(slug)
+
+  if (!post) notFound()
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    author: { '@type': 'Person', name: post.author || 'Agency Team' },
+    datePublished: post.publishedAt,
+    publisher: {
+      '@type': 'Organization',
+      name: 'AI Agency',
+      url: baseUrl,
+    },
+    mainEntityOfPage: `${baseUrl}/blog/${slug}`,
+  }
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <section className="pt-32 pb-16 bg-gradient-to-br from-primary-800 to-accent-600">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
@@ -80,11 +176,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
               {post.content ? (
                 <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-primary-600">
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {typeof post.content === 'string'
-                      ? post.content
-                      : 'Full article content available in the admin panel.'}
-                  </p>
+                  {renderRichText(post.content)}
                 </div>
               ) : (
                 <div className="text-center py-12 text-gray-400">

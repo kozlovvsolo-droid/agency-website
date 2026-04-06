@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
@@ -7,20 +8,48 @@ import { Container } from '@/components/ui/Container'
 import { ArrowLeft, ExternalLink, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function PortfolioPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+async function getPortfolioItem(slug: string) {
   const payload = await getPayload({ config: configPromise })
-
   const { docs } = await payload.find({
     collection: 'portfolio',
     where: { slug: { equals: slug } },
     depth: 1,
     limit: 1,
   })
+  return docs[0] as any | null
+}
 
-  if (!docs.length) notFound()
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const item = await getPortfolioItem(slug)
+  if (!item) return { title: 'Project Not Found' }
 
-  const item = docs[0] as any
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'
+
+  return {
+    title: `${item.title} — AI Agency Portfolio`,
+    description: item.description?.slice(0, 160) || item.title,
+    alternates: { canonical: `${baseUrl}/portfolio/${slug}` },
+    openGraph: {
+      title: item.title,
+      description: item.description?.slice(0, 160) || item.title,
+      type: 'article',
+      url: `${baseUrl}/portfolio/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: item.title,
+      description: item.description?.slice(0, 160) || item.title,
+    },
+  }
+}
+
+export default async function PortfolioPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const item = await getPortfolioItem(slug)
+
+  if (!item) notFound()
+
   const service = item.category
 
   return (

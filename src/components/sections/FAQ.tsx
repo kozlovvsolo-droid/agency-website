@@ -44,14 +44,21 @@ function FAQItem({ question, answer, isOpen, onClick }: any) {
       <button
         onClick={onClick}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary-600 transition-colors"
+        aria-expanded={isOpen}
       >
         <span className="font-semibold text-gray-900">{question}</span>
         <ChevronDown
           size={20}
-          className={`text-gray-600 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`text-gray-600 shrink-0 ml-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
-      {isOpen && <div className="pb-6 text-gray-600 leading-relaxed">{answer}</div>}
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-6 text-gray-600 leading-relaxed">{answer}</div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -59,8 +66,25 @@ function FAQItem({ question, answer, isOpen, onClick }: any) {
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+
   return (
     <section id="faq" className="py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Container>
         <SectionHeading
           title="Frequently Asked Questions"

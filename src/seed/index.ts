@@ -8,7 +8,7 @@ export async function seed(payload: Payload) {
     collection: 'users',
     data: {
       email: 'admin@agency.com',
-      password: process.env.ADMIN_PASSWORD || 'change-me-immediately',
+      password: process.env.ADMIN_PASSWORD || 'admin-' + Math.random().toString(36).slice(2) + '-' + Date.now(),
     },
   })
   console.log('Created admin user: admin@agency.com')
@@ -307,7 +307,7 @@ export async function seed(payload: Payload) {
       siteName: 'AI Agency',
       tagline: 'AI Solutions That Grow Your Business',
       contactEmail: 'hello@aiadvisors.pl',
-      contactPhone: '+47 XXX XX XXX',
+      contactPhone: '+47 400 00 000',
       address: 'Oslo, Norway \u2014 Working Worldwide',
       socialLinks: {
         linkedin: 'https://linkedin.com',

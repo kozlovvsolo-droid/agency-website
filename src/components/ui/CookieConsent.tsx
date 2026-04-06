@@ -21,13 +21,13 @@ export function CookieConsent() {
   if (!show) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-gray-900 border-t border-gray-800 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:flex items-center justify-between gap-4">
-        <p className="text-sm text-gray-600">We use cookies to improve your experience and analyze site usage.</p>
+        <p className="text-sm text-gray-300">We use cookies to improve your experience and analyze site usage.</p>
         <div className="flex gap-3 mt-4 sm:mt-0 shrink-0">
           <button
             onClick={() => handleConsent(false)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+            className="px-4 py-2 border border-gray-600 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800 transition"
           >
             Decline
           </button>

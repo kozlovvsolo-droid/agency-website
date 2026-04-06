@@ -5,7 +5,10 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 export const metadata: Metadata = {
-  title: 'AI Agency \u2014 AI Solutions That Grow Your Business',
+  title: {
+    default: 'AI Agency \u2014 AI Solutions That Grow Your Business',
+    template: '%s | AI Agency',
+  } as any,
   description:
     'Get 30-80% more leads with AI chatbots, business automation, and smart websites. Results in weeks, not months.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://agency-website-fort2.vercel.app'),
@@ -16,7 +19,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'AI Agency',
+    url: '/',
   },
+  alternates: { canonical: '/' },
   twitter: {
     card: 'summary_large_image',
     title: 'AI Agency \u2014 Grow Your Business with AI',

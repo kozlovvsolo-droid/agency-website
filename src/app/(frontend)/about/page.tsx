@@ -1,11 +1,23 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Brain, Target, ShieldCheck, Handshake, Zap, Heart, Linkedin } from 'lucide-react'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'About Us — AI Agency',
+  description: 'Meet the team behind AI Agency. We help businesses grow with AI chatbots, automation, and smart websites.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About Us — AI Agency',
+    description: 'Meet the team behind AI Agency. We help businesses grow with AI chatbots, automation, and smart websites.',
+    type: 'website',
+  },
+}
 
 const iconMap: Record<string, React.ElementType> = {
   brain: Brain,

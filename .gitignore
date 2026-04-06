@@ -3,6 +3,8 @@ node_modules/
 *.db
 media/
 .env
+.env.production
+.env.staging
 src/payload-types.ts
 .vercel
 .env*.local
